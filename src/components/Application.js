@@ -68,7 +68,7 @@ export default function Application(props) {
     { id: 5, name: "Sven Jones", avatar: "https://i.imgur.com/twYrpay.jpg" }
   ];
   useEffect(()=> {
-    axios.get('http://localhost:8001/api/days')
+    axios.get('/api/days')
       .then(res => {
         setDays(res.data)
       })
