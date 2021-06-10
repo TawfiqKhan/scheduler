@@ -1,3 +1,5 @@
+import Empty from "components/Appointment/Empty";
+
 function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
   const allAppointments = [];
@@ -15,6 +17,7 @@ function getAppointmentsForDay(state, day) {
 }
 
 function getInterview(state, interview) {
+  // if interview objects passes is Empty, meaning no interview booked, so returning null
   const output = {};
   if(!interview){
     return null;
