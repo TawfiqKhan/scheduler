@@ -22,14 +22,8 @@ export default function Application(props) {
   console.log(getAppointmentsForDay)
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
-  // const setDay = day => setState(prevState => ({...prevState, day: day}))
-  const setDay = (day)=> {
-    console.log(day)
-    setState(prevState => ({...prevState, day}))
-  }
-  // const setDays = days => setState(prevState => ({...prevState, days}))
-  // setState(prev => ({ ...prev, days }));
-
+  const setDay = day => setState(prevState => ({...prevState, day}))
+  
   const allAppointments = dailyAppointments.map(appointment => {
     return (
       <Appointment
