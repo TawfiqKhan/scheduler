@@ -61,7 +61,7 @@ export default function Application(props) {
   const dailyAppointments = [];
 
   const setDay = day => setState(prevState => ({...prevState, day}))
-  const setDays = days => setState(prevState => ({...prevState, days}))
+  // const setDays = days => setState(prevState => ({...prevState, days}))
   // setState(prev => ({ ...prev, days }));
   
   const interviewers = [
@@ -80,10 +80,17 @@ export default function Application(props) {
   })
 
   useEffect(()=> {
-    axios.get('/api/days')
-      .then(res => {
-        setDays(res.data)
-      })
+    // axios.get('/api/days')
+    //   .then(res => {
+    //     setDays(res.data)
+    //   })
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments')
+    ]).then((all)=> {
+      const daysData = all[0].data;
+      const appointmentsData = all[1].data
+    })
   }, [])
   return (
     <main className="layout">
