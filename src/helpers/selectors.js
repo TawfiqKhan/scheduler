@@ -31,4 +31,4 @@ function getInterview(state, interview) {
   return output;
 }
 
-export{getAppointmentsForDay, getInterview}
+export {getAppointmentsForDay, getInterview}
