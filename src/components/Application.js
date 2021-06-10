@@ -90,6 +90,8 @@ export default function Application(props) {
     ]).then((all)=> {
       const daysData = all[0].data;
       const appointmentsData = all[1].data
+      setState(prevState => ({...prevState, days: daysData, appointments: appointmentsData}))
+      // dailyAppointments = state.appointments;
     })
   }, [])
   return (
