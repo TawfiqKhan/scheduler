@@ -4,7 +4,17 @@ const useVisualMode = (initialMode) => {
   // const [mode, setMode] = useState(initialMode);
   const [history, setHistory] = useState([initialMode]);
 
-  function transition(newMode) {
+  function transition(newMode, replace = false) {
+    if(replace){
+      console.log("Inside Replace")
+      console.log("Before SetHistory----", history)
+      // setHistory(prev => {[...prev, prev[0] = "third"]})
+      setHistory(prev => {
+        let newArr = [...prev]
+        newArr[newArr.length - 1 ] = newMode
+        return newArr
+      })
+    }
     setHistory(prev => [...prev, newMode])
     // return setMode(newMode)
   }
@@ -19,3 +29,5 @@ const useVisualMode = (initialMode) => {
 }
 
 export { useVisualMode }
+
+//First, Second, Third, Fourth
