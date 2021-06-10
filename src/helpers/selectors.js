@@ -1,4 +1,4 @@
-export function getAppointmentsForDay(state, day) {
+function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
   const allAppointments = [];
   let filetredDay = state.days.filter(item=> item.name === day)
@@ -13,3 +13,19 @@ export function getAppointmentsForDay(state, day) {
   }
   return allAppointments;
 }
+
+function getInterview(state, interview) {
+  const output = {};
+  if(!interview){
+    return null;
+  }
+  output.student = interview.student;
+  output.interviewer = {};
+  output.interviewer.id = interview.interviewer;
+
+  output.interviewer.name = state.interviewers[interview.interviewer]["name"];
+  output.interviewer.avatar = state.interviewers[interview.interviewer]["avatar"];
+  return output;
+}
+
+export{getAppointmentsForDay, getInterview}

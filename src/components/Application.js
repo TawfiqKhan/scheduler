@@ -31,7 +31,7 @@ export default function Application(props) {
         interview = {interview}
       />)
   })
-  
+
   useEffect(()=> {
     Promise.all([
       axios.get('/api/days'),
@@ -40,7 +40,7 @@ export default function Application(props) {
     ]).then((all)=> {
       const daysData = all[0].data;
       const appointmentsData = all[1].data
-      const interviewersData = all[1].data
+      const interviewersData = all[2].data
       setState(prevState => ({...prevState, days: daysData, appointments: appointmentsData, interviewers : interviewersData}))
     })
   }, [])
