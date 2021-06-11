@@ -18,6 +18,12 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
   
+  function save(name, interviewer){
+    const interview = {
+      student: name,
+      interviewer
+    }
+  }
   return (
     <article className="appointment">
       <Header time={props.time} />
