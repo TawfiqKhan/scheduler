@@ -41,15 +41,11 @@ export default function Appointment(props) {
     }
     // console.log("Line 26----", props.id)
     props.bookInterview(props.id, newInterview)
-    .then(res => transition(SHOW))
-    
-      // .then(() => transition(SHOW))
-      // setTimeout(() => {
-        // transition(SHOW)
-      // }, 2000);
+    .then(res => transition(SHOW))   
+  }
 
-    console.log("bookInterview has been called")
-    
+  function deleteInt(){
+    props.deleteInterview(props.id)
   }
 
   return (
@@ -60,6 +56,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete = {deleteInt}
         />
       )}
       {mode === CREATE && (
@@ -67,12 +64,11 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
-          bookInterview={props.bookInterview}
         />
       )}
       {mode === SAVING && (
         <Status
-          message="Saving"
+          message="Saving..."
         />
       )}
     </article>

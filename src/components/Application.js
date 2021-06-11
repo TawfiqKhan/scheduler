@@ -41,6 +41,10 @@ export default function Application(props) {
     })
     .catch(err => console.log(err))
   }
+
+  function deleteInterview(id){
+    console.log("Delete ID:::-----", id)
+  }
   const schedule = dailyAppointments.map(appointment => {
     const availableInterviewers = getInterviewersForDay(state, state.day)
     const interview = getInterview(state, appointment.interview)
@@ -52,6 +56,7 @@ export default function Application(props) {
         interview = {interview}
         interviewers = {availableInterviewers}
         bookInterview = {bookInterview}
+        deleteInterview = {deleteInterview}
       />)
   })
 
