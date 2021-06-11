@@ -41,7 +41,8 @@ export default function Appointment(props) {
     }
     // console.log("Line 26----", props.id)
     props.bookInterview(props.id, newInterview)
-    transition(SHOW);
+    .then(res => transition(SHOW))
+    
       // .then(() => transition(SHOW))
       // setTimeout(() => {
         // transition(SHOW)
