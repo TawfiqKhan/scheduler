@@ -23,9 +23,9 @@ export default function Form(props) {
   }
 
   function save(){
+    console.log("Save has been called")
     props.onSave(name, interviewer)
   }
-  console.log("line----32", props.interviewers)
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
