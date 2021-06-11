@@ -46,10 +46,14 @@ export default function Appointment(props) {
     .then(res => transition(SHOW))   
   }
 
-  function delInterview(){
+  function canInterview(){
     // transition(CONFIRM)
     transition(DELETING)
-    props.deleteInterview(props.id)
+    props.cancelInterview(props.id)
+    .then(res => {
+      console.log("Deleted")
+      transition(EMPTY)}
+      )   
 
   }
 
@@ -61,7 +65,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete = {delInterview}
+          onDelete = {canInterview}
         />
       )}
       {mode === CREATE && (
