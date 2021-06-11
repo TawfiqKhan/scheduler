@@ -20,17 +20,17 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (props.interview && mode === EMPTY) {
-      transition(SHOW);
-    }
+  //   if (props.interview && mode === EMPTY) {
+  //     transition(SHOW);
+  //   }
 
-    if (!props.interview && mode === SHOW) {
-      transition(EMPTY);
-    }
+  //   if (!props.interview && mode === SHOW) {
+  //     transition(EMPTY);
+  //   }
 
-  }, [mode, transition, props.interview])
+  // }, [mode, transition, props.interview])
 
 
   function save(name, interviewer) {
@@ -40,9 +40,15 @@ export default function Appointment(props) {
       interviewer
     }
     // console.log("Line 26----", props.id)
-    props.bookInterview(30, newInterview)
-      .then(() => transition(SHOW))
-    // transition(SHOW)
+    props.bookInterview(props.id, newInterview)
+    transition(SHOW);
+      // .then(() => transition(SHOW))
+      // setTimeout(() => {
+        // transition(SHOW)
+      // }, 2000);
+
+    console.log("bookInterview has been called")
+    
   }
 
   return (
