@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 
 import { useVisualMode } from "hooks/useVisualMode"
 import Header from "components/Appointment/Header";
@@ -43,18 +43,16 @@ export default function Appointment(props) {
     }
     // console.log("Line 26----", props.id)
     props.bookInterview(props.id, newInterview)
-    .then(res => transition(SHOW))   
+      .then(res => transition(SHOW))
+  }
+  function confirmDelete() {
+    transition(DELETING)
+    deleteInterview()
   }
 
-  function canInterview(){
-    // transition(CONFIRM)
-    transition(DELETING)
-    props.cancelInterview(props.id)
-    .then(res => {
-      console.log("Deleted")
-      transition(EMPTY)}
-      )   
-
+  function deleteInterview() {
+      props.cancelInterview(props.id)
+        .then(res => transition(EMPTY))
   }
 
   return (
@@ -65,7 +63,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete = {canInterview}
+          onDelete={()=> transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -82,13 +80,15 @@ export default function Appointment(props) {
       )}
       {mode === CONFIRM && (
         <Confirm
-        message = "Are you sure you would like to Delete?"
+          message="Are you sure you would like to Delete?"
+          onConfirm ={confirmDelete}
+          onCancel={() => transition(SHOW)}
         />
       )}
       {mode === DELETING && (
         <Status
-        message="Deleting..."
-      />
+          message="Deleting..."
+        />
       )}
     </article>
   )

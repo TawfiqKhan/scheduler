@@ -22,6 +22,8 @@ export default function Application(props) {
 
   const setDay = day => setState(prevState => ({...prevState, day}))
 
+
+  //Book interview and cancel funnction can be merged in future
   function bookInterview(id, interview) {
     console.log(id, interview);
     const appointment = {
@@ -36,26 +38,26 @@ export default function Application(props) {
 
     return axios.put(`/api/appointments/${id}`, {interview})
     .then(res => {
-      console.log(res.data)
       setState(prev => ({...prev, appointments}))
     })
     .catch(err => console.log(err))
   }
 
   function cancelInterview(id){
-    console.log("Delete ID:::-----", id)
+    // first setting interview to null
     const appointment = {
       ...state.appointments[id],
       interview: null
     };
-
+    // updating the appointment
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
+    // making delete request to DB
     return axios.delete(`/api/appointments/${id}`, {interview: null})
       .then(res => {
-        console.log("Put Reqeust has been Sent")
+        // Updating the state once db request is successfull
         setState(prev => ({...prev, appointments}))
       })
       .catch(err => console.log(err))
