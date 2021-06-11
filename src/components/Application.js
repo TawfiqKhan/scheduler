@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
 
-import {getAppointmentsForDay, getInterview} from '../helpers/selectors'
+import {getAppointmentsForDay, getInterviewersForDay, getInterview} from '../helpers/selectors'
 
 import DayList from './DayList';
 import Appointment from "components/Appointment/"
@@ -19,9 +19,11 @@ export default function Application(props) {
   //Uses helper function to get appointments
   const dailyAppointments = getAppointmentsForDay(state, state.day)
 
+
   const setDay = day => setState(prevState => ({...prevState, day}))
 
   const schedule = dailyAppointments.map(appointment => {
+    const availableInterviewers = getInterviewersForDay(state, state.day)
     const interview = getInterview(state, appointment.interview)
     return (
       <Appointment
@@ -29,6 +31,7 @@ export default function Application(props) {
         id = {appointment.id}
         time = {appointment.time}
         interview = {interview}
+        interviewers = {availableInterviewers}
       />)
   })
 
