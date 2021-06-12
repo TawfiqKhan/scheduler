@@ -7,6 +7,7 @@ import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 import("components/Appointment/styles.scss")
 
 // console.log(useVisualMode)
@@ -19,6 +20,8 @@ export default function Appointment(props) {
   const CONFIRM = "CONFIRM"
   const DELETING = "DELETING"
   const EDIT = "EDIT"
+  const ERROR_SAVING = "ERROR_SAVING"
+  const ERROR_DELETING = "ERROR_DELETING"
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -33,6 +36,7 @@ export default function Appointment(props) {
     // console.log("Line 26----", props.id)
     props.bookInterview(props.id, newInterview)
       .then(res => transition(SHOW))
+      .catch(res => transition(ERROR_SAVING, true))
   }
   function confirmDelete() {
     transition(DELETING)
@@ -42,7 +46,11 @@ export default function Appointment(props) {
   function deleteInterview() {
     props.cancelInterview(props.id)
       .then(res => transition(EMPTY))
+      .catch(()=> transition(ERROR_DELETING))
   }
+
+  //EMPTY, CREATE, SAVING, ERROR_SAVING
+  //SHOW, CONFIRM, DELETING, ERROR_DELETING
 
   return (
     <article className="appointment">
@@ -52,7 +60,7 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
-          onDelete={() => transition(CONFIRM)}
+          onDelete={() => transition(CONFIRM, true)}
           onEdit={() => transition(EDIT)}
         />
       )}
@@ -87,6 +95,18 @@ export default function Appointment(props) {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
+        />
+      )}
+      {mode === ERROR_SAVING && (
+        <Error 
+        message = "Failed to Create, Please try again!"
+        onClose = {back}
+        />
+      )}
+      {mode === ERROR_DELETING && (
+        <Error 
+        message = "Failed to Cancel Interview, Please try again!"
+        onClose = {() => transition(SHOW)}
         />
       )}
     </article>

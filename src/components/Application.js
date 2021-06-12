@@ -11,7 +11,7 @@ export default function Application(props) {
 
 //Setting up state
   const [state, setState] = useState({
-    day: "",
+    day: "Monday",
     days : [],
     appointments: {},
     interviewers : []
@@ -25,7 +25,6 @@ export default function Application(props) {
 
   //Book interview and cancel funnction can be merged in future
   function bookInterview(id, interview) {
-    console.log(id, interview);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
@@ -38,9 +37,9 @@ export default function Application(props) {
 
     return axios.put(`/api/appointments/${id}`, {interview})
     .then(res => {
+      console.log("Entered then after put.....")
       setState(prev => ({...prev, appointments}))
     })
-    .catch(err => console.log(err))
   }
 
   function cancelInterview(id){
@@ -60,8 +59,6 @@ export default function Application(props) {
         // Updating the state once db request is successfull
         setState(prev => ({...prev, appointments}))
       })
-      .catch(err => console.log(err))
-      
   }
   const schedule = dailyAppointments.map(appointment => {
     const availableInterviewers = getInterviewersForDay(state, state.day)
@@ -116,6 +113,7 @@ export default function Application(props) {
       </section>
       <section className="schedule">
         {schedule}
+        <Appointment id="last" time="5pm" bookInterview={bookInterview} />
       </section>
     </main>
   );

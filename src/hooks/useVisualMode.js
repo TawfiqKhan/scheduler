@@ -5,6 +5,7 @@ const useVisualMode = (initialMode) => {
   const [history, setHistory] = useState([initialMode]);
 
   function transition(newMode, replace = false) {
+    console.log("Without Replace----", history)
     if(replace){
       console.log("Inside Replace")
       console.log("Before SetHistory----", history)
@@ -12,6 +13,7 @@ const useVisualMode = (initialMode) => {
       setHistory(prev => {
         let newArr = [...prev]
         newArr[newArr.length - 1 ] = newMode
+        console.log("After SetHistory----", history)
         return newArr
       })
     }
