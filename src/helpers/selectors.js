@@ -16,8 +16,12 @@ function getAppointmentsForDay(state, day) {
   return allAppointments;
 }
 
+// there is a bug here, no form validation so when use input blanks data get accepted and site breaks
+
 function getInterview(state, interview) {
   // if interview objects passes is Empty, meaning no interview booked, so returning null
+  // console.log("From Selectors------State:---", state)
+  // console.log("From Selectors------Interview---", interview)
   const output = {};
   if(!interview){
     return null;
@@ -25,7 +29,7 @@ function getInterview(state, interview) {
   output.student = interview.student;
   output.interviewer = {};
   output.interviewer.id = interview.interviewer;
-
+  // console.log("From Selectors------", output.interviewers)
   output.interviewer.name = state.interviewers[interview.interviewer]["name"];
   output.interviewer.avatar = state.interviewers[interview.interviewer]["avatar"];
   return output;

@@ -16,20 +16,47 @@ const setDay = day => setState(prevState => ({...prevState, day}))
 
 //Book interview and cancel funnction can be merged in future
 function bookInterview(id, interview) {
-  const appointment = {
-    ...state.appointments[id],
-    interview: { ...interview }
-  };
-
-  const appointments = {
-    ...state.appointments,
-    [id]: appointment
-  };
-
+  // console.log("line 19----application---", id)
+  // console.log("line 19----application---", interview)
+  // const bookingDay = state.days.filter(day=> {
+  // // returning the particular day whose appointments array contain our specifc appointment id
+  //       return day.appointments.includes(id)
+  //   })
+    // console.log("Booking-day:::::::::", bookingDay)
+    
   return axios.put(`/api/appointments/${id}`, {interview})
+  
   .then(res => {
-    console.log("Entered then after put.....")
-    setState(prev => ({...prev, appointments}))
+    console.log(res.config)
+    // spreading the appointment in all appointments and changing its interview
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+      // new: "checking"
+    };
+  // spreading all the appointment and updating a particular appointment
+    const appointments = {
+      ...state.appointments,  
+      [id]: appointment,
+    };
+    //Getting the day for which a new appoint has been created
+    const bookingDay = state.days.filter(day=> {
+      // returning the particular day whose appointments array contain our specifc appointment id
+        return day.appointments.includes(id)
+     })
+    // console.log(bookingDay[0])
+    
+    // mapping over the days array to find our booking day and returning its updated spots plus all other day unchanged
+    const days = state.days.map(day => {
+      // creating a copy of the nested object because map mutated nested object.
+      let tempDay = {...day}
+      if(tempDay.name === bookingDay[0].name){
+        tempDay.spots -= 1
+      }
+      return tempDay
+    })
+    // console.log(updatedDays);
+    setState(prev => ({...prev, appointments, days}))
   })
 }
 

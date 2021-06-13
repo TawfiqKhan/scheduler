@@ -26,6 +26,7 @@ export default function Form(props) {
     console.log("Save has been called")
     props.onSave(name, interviewer)
   }
+  // there is a bug here, no form validation so when use input blanks data get accepted and site breaks
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
