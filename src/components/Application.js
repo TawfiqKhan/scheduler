@@ -22,13 +22,13 @@ export default function Application(props) {
     const interview = getInterview(state, appointment.interview)
     return (
       <Appointment
-        key ={appointment.id}
-        id ={appointment.id}
-        time ={appointment.time}
-        interview = {interview}
-        interviewers = {availableInterviewers}
-        bookInterview = {bookInterview}
-        cancelInterview = {cancelInterview}
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={availableInterviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />)
   })
 
