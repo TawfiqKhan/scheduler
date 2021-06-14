@@ -70,7 +70,7 @@ export default function Appointment(props) {
           onCancel={back}
           onSave={save}
         />
-      )}ß
+      )}
       {mode === SAVING && (
         <Status
           message="Saving..."
