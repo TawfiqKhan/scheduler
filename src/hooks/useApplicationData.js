@@ -40,7 +40,7 @@ function useApplicationData() {
           [id]: appointment,
         };
         const updatedDays = updateSpots(id)
-        setState(prev => ({ ...prev, appointments, days: updatedDays}))
+        setState(prev => ({ ...prev, appointments, days: updatedDays }))
       })
   }
 
@@ -48,7 +48,7 @@ function useApplicationData() {
     // making delete request to DB
     return axios.delete(`/api/appointments/${id}`, { interview: null })
       .then(res => {
-            // first setting interview to null
+        // first setting interview to null
         const appointment = {
           ...state.appointments[id],
           interview: null
@@ -58,7 +58,7 @@ function useApplicationData() {
           ...state.appointments,
           [id]: appointment
         };
-    const updatedDays = updateSpots(id, false)
+        const updatedDays = updateSpots(id, false)
         // Updating the state once db request is successfull
         setState(prev => ({ ...prev, appointments, days: updatedDays }))
       })
@@ -79,7 +79,7 @@ function useApplicationData() {
       // creating a copy of the nested object because map mutated nested object.
       let tempDay = { ...day }
       if (tempDay.name === bookingDay[0].name) {
-        minus ? tempDay.spots -- : tempDay.spots ++
+        minus ? tempDay.spots-- : tempDay.spots++
       }
       return tempDay
     })

@@ -46,7 +46,7 @@ export default function Appointment(props) {
   function deleteInterview() {
     props.cancelInterview(props.id)
       .then(res => transition(EMPTY))
-      .catch(()=> transition(ERROR_DELETING))
+      .catch(() => transition(ERROR_DELETING))
   }
 
   //EMPTY, CREATE, SAVING, ERROR_SAVING
@@ -70,7 +70,7 @@ export default function Appointment(props) {
           onCancel={back}
           onSave={save}
         />
-      )}
+      )}ß
       {mode === SAVING && (
         <Status
           message="Saving..."
@@ -91,22 +91,22 @@ export default function Appointment(props) {
       {mode === EDIT && (
         <Form
           student={props.interview.student}
-          interviewer= {props.interview.interviewer.id}
+          interviewer={props.interview.interviewer.id}
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
         />
       )}
       {mode === ERROR_SAVING && (
-        <Error 
-        message = "Failed to Create, Please try again!"
-        onClose = {back}
+        <Error
+          message="Failed to Create, Please try again!"
+          onClose={back}
         />
       )}
       {mode === ERROR_DELETING && (
-        <Error 
-        message = "Failed to Cancel Interview, Please try again!"
-        onClose = {() => transition(SHOW)}
+        <Error
+          message="Failed to Cancel Interview, Please try again!"
+          onClose={() => transition(SHOW)}
         />
       )}
     </article>
