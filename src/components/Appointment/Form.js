@@ -7,6 +7,7 @@ export default function Form(props) {
 
   const [name, setName] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("")
 
   function handleChange(e) {
     setName(e.target.value)
@@ -23,6 +24,14 @@ export default function Form(props) {
   }
 
   function save() {
+    props.onSave(name, interviewer)
+  }
+
+  function validate() {
+    if (name === "") {
+      setError("Student name cannot be blank")
+      return
+    }
     props.onSave(name, interviewer)
   }
   // there is a bug here, no form validation so when use input blanks data get accepted and site breaks
@@ -43,6 +52,7 @@ export default function Form(props) {
             required="required"
           />
         </form>
+        <section className="appointment__validation">{error}</section>
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
@@ -52,7 +62,7 @@ export default function Form(props) {
       <section className="appointment__card-right">
         <section className="appointment__actions">
           <Button onClick={cancel} danger>Cancel</Button>
-          <Button onClick={save} confirm>Save</Button>
+          <Button onClick={validate} confirm>Save</Button>
         </section>
       </section>
     </main>
