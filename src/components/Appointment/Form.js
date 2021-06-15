@@ -23,7 +23,6 @@ export default function Form(props) {
   }
 
   function save() {
-    console.log("Save has been called")
     props.onSave(name, interviewer)
   }
   // there is a bug here, no form validation so when use input blanks data get accepted and site breaks
@@ -41,6 +40,7 @@ export default function Form(props) {
             placeholder="Enter Student Name"
             onChange={handleChange}
             data-testid="student-name-input"
+            required="required"
           />
         </form>
         <InterviewerList
