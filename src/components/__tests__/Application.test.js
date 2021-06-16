@@ -27,17 +27,6 @@ describe("Application", () => {
     expect(renderedComponent.getByText("Leopold Silvers")).toBeInTheDocument();
   });
 
-  // it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
-  //   const renderedComponent = render(<Application />);
-  //   await renderedComponent.findByText("Archie Cohen")
-  //   const button = await renderedComponent.findAllByAltText('Add')[0];
-  //   fireEvent.click(button)
-  //   // fireEvent.change(renderedComponent.getByPlaceholderText("Enter Student Name"), {
-  //   //   target: { value: "Lydia Miller-Jones" }
-  //   // });
-  //   console.log(button)
-
-  // })
   it("loads data, books an interview and reduces the spots remaining for Monday by 1", async () => {
     const { container } = render(<Application />);
 
@@ -58,4 +47,17 @@ describe("Application", () => {
     const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"))
     expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   });
+
+  it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
+    // 1. Render the application
+    const { container, debug } = render(<Application />)
+    // 2. Wait until the text 'Archie Cohen' is displayed
+    // 3. find the appointment containing archie Cohen
+    // 4. click on the delete button(img)
+    // 5. clicking on the button should display confirmation component
+    // 6. confirming delete should set the interview as null
+    // 7. Check that the element with the text "Deleting" is displayed.
+    // 8. Wait until the element with the "Add" button is displayed.
+    // 9 Check that the DayListItem with the text "Monday" also has the text "2 spots remaining"
+  })
 });
