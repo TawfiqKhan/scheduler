@@ -16,6 +16,7 @@ export default function Form(props) {
   function reset() {
     setName("");
     setInterviewer(null);
+    setError("")
   }
 
   function cancel() {
@@ -23,15 +24,12 @@ export default function Form(props) {
     props.onCancel()
   }
 
-  function save() {
-    props.onSave(name, interviewer)
-  }
-
   function validate() {
     if (name === "") {
       setError("Student name cannot be blank")
       return
     }
+    setError('')
     props.onSave(name, interviewer)
   }
   // there is a bug here, no form validation so when use input blanks data get accepted and site breaks
