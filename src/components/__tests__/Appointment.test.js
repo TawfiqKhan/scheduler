@@ -10,13 +10,6 @@ describe("test suite for Appointment componenet", () => {
     const availableInterviewers = { name: "Ariana Grande", avatar: "http://avatar.jpg" }
     render(
       <Appointment
-      // key='1'
-      // id='1'
-      // time='12pm'
-      // interview={interview}
-      // interviewers={availableInterviewers}
-      // bookInterview={() => { }}
-      // cancelInterview={() => { }}
       />)
   })
 })
