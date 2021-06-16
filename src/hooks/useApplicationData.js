@@ -27,7 +27,6 @@ function useApplicationData() {
     return axios.put(`/api/appointments/${id}`, { interview })
 
       .then(res => {
-        console.log(res.config)
         // spreading the appointment in all appointments and changing its interview
         const appointment = {
           ...state.appointments[id],
