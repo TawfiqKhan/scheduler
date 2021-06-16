@@ -120,9 +120,9 @@ describe("Application", () => {
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   });
 
-  it.only("shows the delete error when failing to delete an existing appointment", async () => {
+  it("shows the delete error when failing to delete an existing appointment", async () => {
     axios.delete.mockRejectedValueOnce();
-    const { container, debug } = render(<Application />)
+    const { container } = render(<Application />)
     await findByText(container, "Archie Cohen")
     const appointment = getAllByTestId(container, "appointment")
       .find(appointment => queryByText(appointment, "Archie Cohen"))
