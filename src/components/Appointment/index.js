@@ -28,15 +28,20 @@ export default function Appointment(props) {
   );
 
   function save(name, interviewer) {
-    transition(SAVING);
     let newInterview = {
       student: name,
       interviewer
     }
-    // console.log("Line 26----", props.id)
-    props.bookInterview(props.id, newInterview)
-      .then(res => transition(SHOW))
-      .catch(res => transition(ERROR_SAVING, true))
+    transition(SAVING);
+    if (mode === 'EDIT') {
+      props.bookInterview(props.id, newInterview, true)
+        .then(res => transition(SHOW))
+        .catch(res => transition(ERROR_SAVING, true))
+    } else {
+      props.bookInterview(props.id, newInterview)
+        .then(res => transition(SHOW))
+        .catch(res => transition(ERROR_SAVING, true))
+    }
   }
   function confirmDelete() {
     transition(DELETING)

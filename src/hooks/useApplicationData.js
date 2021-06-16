@@ -15,14 +15,7 @@ function useApplicationData() {
 
 
   //Book interview and cancel funnction can be merged in future
-  function bookInterview(id, interview) {
-    // console.log("line 19----application---", id)
-    // console.log("line 19----application---", interview)
-    // const bookingDay = state.days.filter(day=> {
-    // // returning the particular day whose appointments array contain our specifc appointment id
-    //       return day.appointments.includes(id)
-    //   })
-    // console.log("Booking-day:::::::::", bookingDay)
+  function bookInterview(id, interview, edit = false) {
 
     return axios.put(`/api/appointments/${id}`, { interview })
 
@@ -38,8 +31,12 @@ function useApplicationData() {
           ...state.appointments,
           [id]: appointment,
         };
-        const updatedDays = updateSpots(id)
-        setState(prev => ({ ...prev, appointments, days: updatedDays }))
+        // only updatespots if it is a new booking
+        if (!edit) {
+          const updatedDays = updateSpots(id)
+          return setState(prev => ({ ...prev, appointments, days: updatedDays }))
+        }
+        setState(prev => ({ ...prev, appointments }))
       })
   }
 

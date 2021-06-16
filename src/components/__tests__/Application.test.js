@@ -5,12 +5,18 @@ import {
   cleanup,
   fireEvent,
   getByText,
+  getByRole,
+  getAllByRole,
   prettyDOM,
   findByText,
   getByAltText,
+  queryByAltText,
   getByTestId,
   getAllByTestId,
   queryByText,
+  findByAltText,
+  queryByRole,
+  waitForElement
 } from "@testing-library/react";
 
 import Application from "components/Application";
@@ -51,13 +57,40 @@ describe("Application", () => {
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     // 1. Render the application
     const { container, debug } = render(<Application />)
-    // 2. Wait until the text 'Archie Cohen' is displayed
+    // 2. Wait until the text 'Archie Cohen' is displayeds
+    await findByText(container, "Archie Cohen")
     // 3. find the appointment containing archie Cohen
-    // 4. click on the delete button(img)
+    const appointment = getAllByTestId(container, "appointment")
+      .find(appointment => queryByText(appointment, "Archie Cohen"))
+    // 4. click on the delete button(img) 
+    fireEvent.click(getByAltText(appointment, "Delete"))
     // 5. clicking on the button should display confirmation component
-    // 6. confirming delete should set the interview as null
-    // 7. Check that the element with the text "Deleting" is displayed.
-    // 8. Wait until the element with the "Add" button is displayed.
-    // 9 Check that the DayListItem with the text "Monday" also has the text "2 spots remaining"
+    expect(getByText(appointment, "Are you sure you would like to Delete?")).toBeInTheDocument();
+    fireEvent.click(getByText(appointment, "Confirm"))
+    // 6. Check that the element with the text "Deleting" is displayed once Confirm button is clicked.
+    expect(getByText(appointment, "Deleting...")).toBeInTheDocument();
+    // 7. Wait until the element with the "Add" button is displayed.
+    await findByAltText(appointment, "Add")
+    const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"))
+    // 8 Check that the DayListItem with the text "Monday" also has the text "2 spots remaining"
+    expect(getByText(day, "2 spots remaining")).toBeInTheDocument();
+  })
+
+  it.only("loads data, edits an interview and keeps the spots remaining for Monday the same", async () => {
+    const { container, debug } = render(<Application />)
+    await findByText(container, "Archie Cohen")
+    const appointment = getAllByTestId(container, "appointment")
+      .find(appointment => queryByText(appointment, "Archie Cohen"))
+    fireEvent.click(getByAltText(appointment, "Edit"))
+    fireEvent.change(getByTestId(appointment, "student-name-input"), {
+      target: { value: "Jane Doe" }
+    });
+    fireEvent.click(getByText(appointment, "Save"))
+    expect(getByText(appointment, "Saving...")).toBeInTheDocument();
+    await findByText(appointment, "Jane Doe")
+    expect(getByText(appointment, "Jane Doe")).toBeInTheDocument();
+    // const day = getAllByTestId(container, "day").find(day => queryByText(day, "Monday"))
+    // expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
+    debug()
   })
 });
