@@ -15,11 +15,11 @@ of the app is hosted on netlify.
 
 ## Final Product
 
-!["Homepage"](https://github.com/special3220/scheduler/blob/master/docs/homepage.jpg?raw=true)
-12
-!["Booking"](https://github.com/special3220/tinyapp/blob/master/docs/book-an-interview.jpg?raw=true)
-13
-!["Deleting"](https://github.com/special3220/tinyapp/blob/master/docs/delete-an-interview.jpg?raw=true)
+!["Homepage"](https://github.com/special3220/scheduler/blob/master/docs/Homepage.jpeg?raw=true)
+
+!["Booking"](https://github.com/special3220/scheduler/blob/master/docs/book-an-interview.jpeg?raw=true)
+
+!["Deleting"](https://github.com/special3220/scheduler/blob/master/docs/cancel-an-interview.jpeg?raw=true)
 
 ## Dependencies
 
