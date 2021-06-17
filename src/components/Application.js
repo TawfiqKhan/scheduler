@@ -1,5 +1,4 @@
 import React from "react";
-// import axios from 'axios'
 import { useApplicationData } from "hooks/useApplicationData";
 
 import { getAppointmentsForDay, getInterviewersForDay, getInterview } from '../helpers/selectors'
