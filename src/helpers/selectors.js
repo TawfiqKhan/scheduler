@@ -1,15 +1,13 @@
-import Empty from "components/Appointment/Empty";
-
 function getAppointmentsForDay(state, day) {
   //... returns an array of appointments for that day
   const allAppointments = [];
-  let filetredDay = state.days.filter(item=> item.name === day)
-  if(!filetredDay[0]){
+  let filetredDay = state.days.filter(item => item.name === day)
+  if (!filetredDay[0]) {
     return allAppointments
   }
   let appointmentsForfilteredDay = filetredDay[0].appointments
-  for(let appointmentId of appointmentsForfilteredDay ) {
-    if(state.appointments[appointmentId]) {
+  for (let appointmentId of appointmentsForfilteredDay) {
+    if (state.appointments[appointmentId]) {
       allAppointments.push(state.appointments[appointmentId])
     }
   }
@@ -23,7 +21,7 @@ function getInterview(state, interview) {
   // console.log("From Selectors------State:---", state)
   // console.log("From Selectors------Interview---", interview)
   const output = {};
-  if(!interview){
+  if (!interview) {
     return null;
   }
   output.student = interview.student;
@@ -35,15 +33,15 @@ function getInterview(state, interview) {
   return output;
 }
 
-function getInterviewersForDay(state, day){
+function getInterviewersForDay(state, day) {
   const allInterviewers = [];
-  let filetredDay = state.days.filter(item=> item.name === day)
-  if(!filetredDay[0]){
+  let filetredDay = state.days.filter(item => item.name === day)
+  if (!filetredDay[0]) {
     return allInterviewers
   }
   let interviewersForfilteredDay = filetredDay[0].interviewers
-  for(let interviewerId of interviewersForfilteredDay ) {
-    if(state.interviewers[interviewerId]) {
+  for (let interviewerId of interviewersForfilteredDay) {
+    if (state.interviewers[interviewerId]) {
       allInterviewers.push(state.interviewers[interviewerId])
     }
   }
@@ -51,4 +49,4 @@ function getInterviewersForDay(state, day){
   return allInterviewers;
 }
 
-export {getAppointmentsForDay, getInterviewersForDay, getInterview}
+export { getAppointmentsForDay, getInterviewersForDay, getInterview }
