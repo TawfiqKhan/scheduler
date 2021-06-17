@@ -13,6 +13,13 @@ export default function Form(props) {
     setName(e.target.value)
   }
 
+  function handleInterviewerChange(value) {
+    if (error === "You must select an interviewer") {
+      setError("")
+    }
+    setInterviewer(value)
+  }
+
   function reset() {
     setName("");
     setInterviewer(null);
@@ -28,6 +35,13 @@ export default function Form(props) {
     if (name === "") {
       setError("Student name cannot be blank")
       return
+    }
+    if (!interviewer) {
+      setError("You must select an interviewer")
+      return
+    }
+    if (name && interviewer) {
+      setError('')
     }
     setError('')
     props.onSave(name, interviewer)
@@ -54,7 +68,7 @@ export default function Form(props) {
         <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
-          onChange={setInterviewer}
+          onChange={handleInterviewerChange}
         />
       </section>
       <section className="appointment__card-right">
