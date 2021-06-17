@@ -1,57 +1,59 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import InterviewerList from "components/InterviewerList"
-import Button from "components/Button"
+import InterviewerList from 'components/InterviewerList';
+import Button from 'components/Button';
 
 export default function Form(props) {
-
-  const [name, setName] = useState(props.student || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState("")
+  const [name, setName] = useState(props.student || '');
+  const [interviewer, setInterviewer] = useState(
+    props.interviewer || null,
+  );
+  const [error, setError] = useState('');
 
   function handleChange(e) {
-    setName(e.target.value)
+    setName(e.target.value);
   }
 
   function handleInterviewerChange(value) {
-    if (error === "You must select an interviewer") {
-      setError("")
+    if (error === 'You must select an interviewer') {
+      setError('');
     }
-    setInterviewer(value)
+    setInterviewer(value);
   }
 
   function reset() {
-    setName("");
+    setName('');
     setInterviewer(null);
-    setError("")
+    setError('');
   }
 
   function cancel() {
     reset();
-    props.onCancel()
+    props.onCancel();
   }
 
   function validate() {
-    if (name === "") {
-      setError("Student name cannot be blank")
-      return
+    if (name === '') {
+      setError('Student name cannot be blank');
+      return;
     }
     if (!interviewer) {
-      setError("You must select an interviewer")
-      return
+      setError('You must select an interviewer');
+      return;
     }
     if (name && interviewer) {
-      setError('')
+      setError('');
     }
-    setError('')
-    props.onSave(name, interviewer)
+    setError('');
+    props.onSave(name, interviewer);
   }
   // there is a bug here, no form validation so when use input blanks data get accepted and site breaks
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off"
-          onSubmit={event => event.preventDefault()}
+        <form
+          autoComplete="off"
+          onSubmit={(event) => event.preventDefault()}
         >
           <input
             className="appointment__create-input text--semi-bold"
@@ -73,10 +75,14 @@ export default function Form(props) {
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button onClick={cancel} danger>Cancel</Button>
-          <Button onClick={validate} confirm>Save</Button>
+          <Button onClick={cancel} danger>
+            Cancel
+          </Button>
+          <Button onClick={validate} confirm>
+            Save
+          </Button>
         </section>
       </section>
     </main>
-  )
+  );
 }

@@ -5,22 +5,24 @@ const useVisualMode = (initialMode) => {
 
   function transition(newMode, replace = false) {
     if (replace) {
-      setHistory(prev => {
-        let newArr = [...prev]
-        newArr[newArr.length - 1] = newMode
-        return newArr
-      })
+      setHistory((prev) => {
+        let newArr = [...prev];
+        newArr[newArr.length - 1] = newMode;
+        return newArr;
+      });
     }
-    setHistory(prev => [...prev, newMode])
+    setHistory((prev) => [...prev, newMode]);
   }
   function back() {
-    let lastItem = history[history.length - 1]
+    let lastItem = history[history.length - 1];
     if (history.length === 1) {
       return history;
     }
-    setHistory(prevHistory => prevHistory.filter(item => item !== lastItem))
+    setHistory((prevHistory) =>
+      prevHistory.filter((item) => item !== lastItem),
+    );
   }
-  return { mode: history[history.length - 1], transition, back }
-}
+  return { mode: history[history.length - 1], transition, back };
+};
 
-export { useVisualMode }
+export { useVisualMode };
