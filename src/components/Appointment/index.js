@@ -7,21 +7,20 @@ import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/Confirm";
-import Error from "components/Appointment/Error";
-import("components/Appointment/styles.scss")
+import Error from "components/Appointment/Error"
 
-// console.log(useVisualMode)
+import("components/Appointment/styles.scss")
 
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
-  const SAVING = "SAVING"
-  const CONFIRM = "CONFIRM"
-  const DELETING = "DELETING"
-  const EDIT = "EDIT"
-  const ERROR_SAVING = "ERROR_SAVING"
-  const ERROR_DELETING = "ERROR_DELETING"
+  const SAVING = "SAVING";
+  const CONFIRM = "CONFIRM";
+  const DELETING = "DELETING";
+  const EDIT = "EDIT";
+  const ERROR_SAVING = "ERROR_SAVING";
+  const ERROR_DELETING = "ERROR_DELETING";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -53,9 +52,6 @@ export default function Appointment(props) {
       .then(res => transition(EMPTY))
       .catch(() => transition(ERROR_DELETING))
   }
-
-  //EMPTY, CREATE, SAVING, ERROR_SAVING
-  //SHOW, CONFIRM, DELETING, ERROR_DELETING
 
   return (
     <article
