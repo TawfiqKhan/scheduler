@@ -15,30 +15,30 @@ function useApplicationData() {
 
 
   //Book interview and cancel funnction can be merged in future
-  // function bookInterview(id, interview, edit = false) {
+  function bookInterview(id, interview, edit = false) {
 
-  //   return axios.put(`/api/appointments/${id}`, { interview })
+    return axios.put(`/api/appointments/${id}`, { interview })
 
-  //     .then(res => {
-  //       // spreading the appointment in all appointments and changing its interview
-  //       const appointment = {
-  //         ...state.appointments[id],
-  //         interview: { ...interview }
-  //         // new: "checking"
-  //       };
-  //       // spreading all the appointment and updating a particular appointment
-  //       const appointments = {
-  //         ...state.appointments,
-  //         [id]: appointment,
-  //       };
-  //       // only updatespots if it is a new booking
-  //       if (!edit) {
-  //         const updatedDays = updateSpots(id)
-  //         return setState(prev => ({ ...prev, appointments, days: updatedDays }))
-  //       }
-  //       setState(prev => ({ ...prev, appointments }))
-  //     })
-  // }
+      .then(res => {
+        // spreading the appointment in all appointments and changing its interview
+        const appointment = {
+          ...state.appointments[id],
+          interview: { ...interview }
+          // new: "checking"
+        };
+        // spreading all the appointment and updating a particular appointment
+        const appointments = {
+          ...state.appointments,
+          [id]: appointment,
+        };
+        // only updatespots if it is a new booking
+        if (!edit) {
+          const updatedDays = updateSpots(id)
+          return setState(prev => ({ ...prev, appointments, days: updatedDays }))
+        }
+        setState(prev => ({ ...prev, appointments }))
+      })
+  }
 
   function cancelInterview(id) {
     // making delete request to DB
