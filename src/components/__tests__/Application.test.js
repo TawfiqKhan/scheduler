@@ -94,6 +94,26 @@ describe("Application", () => {
     expect(getByText(day, "1 spot remaining")).toBeInTheDocument();
   })
 
+  it("can cancel an edit or delete operation after initiated", async () => {
+    const { container, debug } = render(<Application />)
+    await findByText(container, "Archie Cohen")
+    // Select the appointment element
+    const appointment = getAllByTestId(container, "appointment")
+      .find(appointment => queryByText(appointment, "Archie Cohen"))
+
+    // Testing cancelling a delete operation
+    fireEvent.click(getByAltText(appointment, "Delete"))
+    expect(getByText(appointment, "Are you sure you would like to Delete?")).toBeInTheDocument();
+    fireEvent.click(getByText(appointment, "Cancel"))
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
+
+    // Testing cancelling an edit operation
+    fireEvent.click(getByAltText(appointment, "Edit"))
+    fireEvent.click(getByText(appointment, "Cancel"))
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();
+
+  })
+
   it("shows the save error when failing to save an appointment", async () => {
     axios.put.mockRejectedValueOnce();
     const { container, debug } = render(<Application />);
